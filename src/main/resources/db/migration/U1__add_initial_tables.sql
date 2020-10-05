@@ -1,0 +1,3 @@
+DROP TABLE Book;
+DROP TABLE `Order`;
+DROP TABLE User;
