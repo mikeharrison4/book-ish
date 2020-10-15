@@ -15,6 +15,10 @@ const checkStatus = (response) => {
 
 export const getAllUsers = () => fetch("/api/users");
 
+export const getUserWithUserId = (userId) => fetch(`/api/users/${userId}`);
+
+export const getUserOrders = (userId) => fetch(`/api/users/${userId}/orders`);
+
 export const getAllBooks = () =>
 	fetch("/api/books")
 		.then(checkStatus);

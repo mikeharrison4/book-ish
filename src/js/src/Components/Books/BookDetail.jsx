@@ -48,8 +48,11 @@ const BookDetail = (
 					<h5>{`In stock: ${availability}`}</h5>
 					<p>{book_description}</p>
 					<h6>{bookIsbn}</h6>
-					<Link to={{
-						pathname: `/books/${isbn}/edit`,
+				</div>
+				<div>
+					<Link
+						className="btn btn-block btn-primary"
+						to={{pathname: `/books/${isbn}/edit`,
 						state: {
 							isbn: bookIsbn,
 							title,
@@ -62,14 +65,18 @@ const BookDetail = (
 					>
 						Edit
 					</Link>
-				</div>
-				<div>
 					<Button
 						variant="danger"
 						onClick={() => handleDelete(isbn)}
 					>
 						Delete
 					</Button>
+					<Link
+						className="btn btn-block btn-success"
+						to={`/books/${isbn}/checkout`}
+					>
+						Check out this book
+					</Link>
 				</div>
 		</div>
 	);

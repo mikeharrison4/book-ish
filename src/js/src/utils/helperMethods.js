@@ -4,7 +4,6 @@ export const disableBtn = (touched, isValid) => {
 };
 
 export const validation = () => {
-	console.log("test");
 	return values => {
 		let errors = {};
 		if (!values.title) {

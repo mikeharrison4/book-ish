@@ -1,8 +1,8 @@
 import React from 'react';
 import {Formik} from "formik";
 import {updateBook} from "../../api/client";
-import { withRouter } from "react-router";
 import {Badge, Button, Form} from "react-bootstrap";
+import {validation} from "../../utils/helperMethods";
 
 const BookEdit = (
 	{
@@ -19,36 +19,20 @@ const BookEdit = (
 		history,
 	}
 ) => {
+	const handleSubmit = (book, { setSubmitting }) => {
+		updateBook(isbn, book).then(() => {
+			history.push(`/books/${isbn}`);
+			setSubmitting(false);
+		})
+	};
+
 	return (
 		<React.Fragment>
 			<h1>Edit <i>{title}</i></h1>
 			<Formik
 				initialValues={{ isbn, title, author, book_description, num_copies, availability }}
-				validate={values => {
-					let errors = {};
-					if(!values.title) {
-						errors.title = 'First name is required'
-					}
-					if(!values.author) {
-						errors.author = 'Author is required'
-					}
-					if(!values.book_description) {
-						errors.book_description = 'Book description is required'
-					}
-					if(!values.num_copies) {
-						errors.num_copies = 'Number of copies is required'
-					}
-					if (!values.availability) {
-						errors.availability = 'Availability is required'
-					}
-					return errors;
-				}}
-				onSubmit={(book, { setSubmitting }) => {
-					updateBook(isbn, book).then(() => {
-						history.push(`/books/${isbn}`);
-						setSubmitting(false);
-					})
-				}}
+				validate={validation()}
+				onSubmit={handleSubmit}
 			>
 				{({
 						values,
@@ -130,4 +114,4 @@ const BookEdit = (
 	);
 };
 
-export default withRouter(BookEdit);
+export default BookEdit;

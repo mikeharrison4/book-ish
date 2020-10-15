@@ -1,30 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import {getAllBooks} from "../../api/client";
+import React from 'react';
 import {Link} from "react-router-dom";
 import Notification from "../Notification";
-import SuccessMessage from "./SuccessMessage";
+import SuccessMessage from "../SuccessMessage";
+import withBookContext from "../../hoc/withBookContext";
 
-const Books = ({ location: { state } }) => {
-	const [isLoading, setIsLoading] = useState(false);
-	const [books, setBooks] = useState([]);
-	const [errorMsg, setErrorMsg] = useState("");
-
-	useEffect(() => {
-		const fetchBooks = () => {
-			setIsLoading(true);
-			getAllBooks()
-				.then(res => res.json()
-					.then(books => {
-						setBooks(books);
-						setIsLoading(false);
-					}))
-				.catch(error => {
-					setErrorMsg(`${error.error.message} (${error.error.error})`);
-					setIsLoading(false);
-				})
-		};
-		fetchBooks();
-	}, []);
+const Books = ({ location: { state }, bookContext: { books, isLoading, errorMsg }, }) => {
 
 	if(isLoading) {
 		return (
@@ -57,4 +37,4 @@ const Books = ({ location: { state } }) => {
 	)
 };
 
-export default Books;
+export default withBookContext(Books);
