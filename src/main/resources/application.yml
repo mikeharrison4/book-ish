@@ -1,5 +1,0 @@
-app:
-  datasource:
-    jdbc-url: jdbc:mysql://localhost:3306/BOOKISH_LIBRARY?useSSL=false
-    username: root
-    password: passwordHer

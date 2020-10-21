@@ -22,7 +22,7 @@ target/
 *.yml
 
 ### NetBeans ###
-/src/main/resources/application.yml
+application.yml
 /nbproject/private/
 /nbbuild/
 /dist/
