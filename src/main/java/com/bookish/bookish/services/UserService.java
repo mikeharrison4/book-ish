@@ -22,7 +22,13 @@ public class UserService {
         return userDataAccessService.selectAllUsers();
     }
 
+    public User getUserWithUserId(String userId) {
+        return userDataAccessService.selectUserWithUserId(userId);
+    }
+
     public List<UserOrder> getAllOrdersForUser(String userId) {
         return userDataAccessService.selectAllUserOrders(userId);
     }
+
+
 }

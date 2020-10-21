@@ -13,14 +13,16 @@ public class UserOrder {
     private final LocalDate date_taken;
     private final LocalDate date_due;
     private final LocalDate date_returned;
+    private final String title;
 
-    public UserOrder(UUID userId, UUID orderId, String isbn, LocalDate date_taken, LocalDate date_due, LocalDate date_returned) {
+    public UserOrder(UUID userId, UUID orderId, String isbn, LocalDate date_taken, LocalDate date_due, LocalDate date_returned, String title) {
         this.userId = userId;
         this.orderId = orderId;
         this.ISBN = isbn;
         this.date_taken = date_taken;
         this.date_due = date_due;
         this.date_returned = date_returned;
+        this.title = title;
     }
 
     public UUID getUserId() {
@@ -45,6 +47,10 @@ public class UserOrder {
 
     public LocalDate getDate_returned() {
         return date_returned;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
 }

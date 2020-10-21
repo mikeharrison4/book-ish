@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS `order` (
     date_taken date NOT NULL,
     date_due date NOT NULL,
     date_returned date NOT NULL,
+    is_checked_out BOOLEAN NOT NULL DEFAULT true,
     FOREIGN KEY FK_ISBN (ISBN) REFERENCES book(ISBN)
 );
 

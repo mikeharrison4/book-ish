@@ -7,20 +7,20 @@ import java.util.UUID;
 public class User {
 
     @Id
-    private final UUID order_id;
+    private final UUID user_id;
     String first_name;
     String last_name;
     String address;
 
-    public User(UUID order_id, String first_name, String last_name, String address) {
-        this.order_id = order_id;
+    public User(UUID user_id, String first_name, String last_name, String address) {
+        this.user_id = user_id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.address = address;
     }
 
-    public UUID getOrder_id() {
-        return order_id;
+    public UUID getUser_id() {
+        return user_id;
     }
 
     public String getFirst_name() {

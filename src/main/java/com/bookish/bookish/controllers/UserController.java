@@ -27,6 +27,11 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @GetMapping("{userId}")
+    public User getUserWithUserId(@PathVariable("userId") String userId) {
+      return userService.getUserWithUserId(userId);
+    };
+
     @GetMapping(path = "{userId}/orders")
     public List<UserOrder> getAllOrdersForUser(@PathVariable("userId") String userId) {
         return userService.getAllOrdersForUser(userId);

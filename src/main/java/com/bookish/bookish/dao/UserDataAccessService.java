@@ -24,13 +24,18 @@ public class UserDataAccessService {
         return jdbcTemplate.query(sql, mapUsersFromDb());
     }
 
+    public User selectUserWithUserId(String userId) {
+        String sql = "SELECT * FROM user WHERE user_id = '" + userId + "'";
+        return jdbcTemplate.queryForObject(sql, mapUsersFromDb());
+    }
+
     private RowMapper<User> mapUsersFromDb() {
         return (resultSet, i) -> {
             String userIdStr = resultSet.getString("user_id");
             UUID userId = UUID.fromString(userIdStr);
             String firstName = resultSet.getString("first_name");
             String lastName = resultSet.getString("last_name");
-            String address = resultSet.getString("last_name");
+            String address = resultSet.getString("address");
             return new User(
                     userId,
                     firstName,
@@ -42,10 +47,13 @@ public class UserDataAccessService {
 
     public List<UserOrder> selectAllUserOrders(String userId) {
         String sql = "" +
-                "SELECT * " +
+                "SELECT user_order.*, " +
+                "`order`.*, " +
+                "book.title " +
                 "FROM user " +
                 "JOIN user_order USING(user_id) " +
                 "JOIN `order` USING(order_id) " +
+                "JOIN book USING(isbn) " +
                 "WHERE user_id = '" + userId + "'";
         return jdbcTemplate.query(sql, mapUserOrderFromDb());
     }
@@ -58,13 +66,15 @@ public class UserDataAccessService {
             LocalDate dateTaken = resultSet.getDate("date_taken").toLocalDate();
             LocalDate dateDue = resultSet.getDate("date_due").toLocalDate();
             LocalDate dateReturned = resultSet.getDate("date_returned").toLocalDate();
+            String title = resultSet.getString("title");
             return new UserOrder(
                     UUID.fromString(userIdStr),
                     UUID.fromString(orderIdStr),
                     isbn,
                     dateTaken,
                     dateDue,
-                    dateReturned
+                    dateReturned,
+                    title
             );
         };
     }
